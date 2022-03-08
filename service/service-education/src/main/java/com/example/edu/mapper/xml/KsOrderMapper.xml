@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.edu.mapper.KsOrderMapper">
+    <insert id="saveOrder" useGeneratedKeys="true" keyColumn="id">
+        INSERT INTO ks_order (`oname`,`odatetime`,`prices`,`uid`) VALUES (#{oname},#{date},#{prices},#{uid})
+    </insert>
+    <select id="queryById" resultType="com.example.edu.entity.KsGoods">
+        SELECT
+        kg.*
+        FROM
+        `ks_order` ko
+        LEFT JOIN ks_goods_order kgo ON ko.oid = kgo.oid
+        LEFT JOIN ks_goods kg ON kgo.gid = kg.id
+        WHERE
+        ko.oid = #{id}
+    </select>
+</mapper>
